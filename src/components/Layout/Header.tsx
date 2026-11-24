@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -29,19 +30,13 @@ const Header = () => {
       <h1 className="text-2xl font-bold text-[#111827] dark:text-[#F4F4F5]">{title}</h1>
 
       <div className="flex items-center gap-3">
-        <button
-          onClick={toggleTheme}
-          className="px-3 py-2 rounded-lg border border-[#E5E7EB] text-sm cursor-pointer dark:border-[#3F3F46] dark:text-[#F4F4F5] dark:hover:border-[#C2416C]"
-        >
+        <Button variant="outline" onClick={toggleTheme} className="cursor-pointer hover:border-[#C2416C]">
           {theme === "light" ? "Dark" : "Light"}
-        </button>
+        </Button>
 
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 rounded-lg bg-[#C2416C] text-white text-sm font-medium cursor-pointer hover:bg-[#A8345B]"
-        >
-          Logout
-        </button>
+        <Button onClick={handleLogout} className="cursor-pointer  hover:bg-[#A8345B]">
+          Log Out
+        </Button>
       </div>
     </header>
   );
