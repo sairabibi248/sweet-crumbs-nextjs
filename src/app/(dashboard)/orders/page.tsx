@@ -7,30 +7,42 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import type { OrderStatus } from "@/types/order";
 import type { OrderFormFields } from "@/schemas/orderSchema";
 
-
-
+/**
+ * Badge colors for each order status
+ * Record makes sure every status has a color
+ */
 const statusColors: Record<OrderStatus, string> = {
   Pending: "bg-yellow-100 text-yellow-700",
   Completed: "bg-green-100 text-green-700",
   Cancelled: "bg-red-100 text-red-700",
 };
 
-
+/** Plain colors for dropdown options so they stay readable in light and dark mode */
 const optionClass =
   "bg-white text-[#111827] dark:bg-[#1C1D21] dark:text-[#F4F4F5]";
 
+/**
+ * Orders page at the /orders URL
+ * Shows all orders in a table with add and status change and delete
+ * Orders come from the Zustand store in useOrder
+ */
 export default function OrdersPage() {
-
+  /** Each selector reads only one value so the page re-renders only when that value changes */
   const orders = useOrderStore((state) => state.orders);
   const addOrder = useOrderStore((state) => state.addOrder);
   const updateStatus = useOrderStore((state) => state.updateStatus);
   const deleteOrder = useOrderStore((state) => state.deleteOrder);
 
-
+  /** True when the Add Order form is open */
   const [isFormOpen, setIsFormOpen] = useState(false);
+
+  /** Id of the order waiting for delete confirm and null when the dialog is closed */
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-
+  /**
+   * Adds a new order from the form data and closes the form
+   * Date.now gives a unique id and every new order starts as Pending
+   */
   const handleAdd = (data: OrderFormFields) => {
     addOrder({
       id: Date.now().toString(),
@@ -40,7 +52,7 @@ export default function OrdersPage() {
     setIsFormOpen(false);
   };
 
-
+  /** Deletes the order after the user confirms and closes the dialog */
   const handleDelete = () => {
     if (deleteId) {
       deleteOrder(deleteId);
@@ -70,7 +82,6 @@ export default function OrdersPage() {
               <th className="p-4">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {orders.map((order) => (
               <tr
@@ -102,7 +113,7 @@ export default function OrdersPage() {
                 <td className="p-4">
                   <button
                     onClick={() => setDeleteId(order.id)}
-                    className="text-red-500 hover:underline cursor-pointer"
+                    className="px-5 py-1.5 rounded-md bg-[#CE4661] text-white text-sm font-semibold cursor-pointer hover:bg-[#B53A54]"
                   >
                     Delete
                   </button>
@@ -110,7 +121,6 @@ export default function OrdersPage() {
               </tr>
             ))}
           </tbody>
-
         </table>
 
         {orders.length === 0 && (
