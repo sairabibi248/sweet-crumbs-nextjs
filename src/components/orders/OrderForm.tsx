@@ -27,8 +27,7 @@ const OrderForm = ({ onSubmit, onClose }: OrderFormProps) => {
     },
   });
 
-  const inputClass =
-    "w-full border border-gray-300 dark:border-[#2A2B30] rounded-lg px-3 py-2 bg-white dark:bg-[#111214] text-[#111827] dark:text-[#F4F4F5] outline-none focus:border-[#C2416C]";
+  const inputClass = "w-full border border-gray-300 dark:border-[#2A2B30] rounded-lg px-3 py-2 bg-white dark:bg-[#111214] text-[#111827] dark:text-[#F4F4F5] outline-none focus:border-[#C2416C]";
 
   return (
     <Modal onClose={onClose}>
@@ -65,8 +64,8 @@ const OrderForm = ({ onSubmit, onClose }: OrderFormProps) => {
           >
             <option value="">Select item</option>
             {items.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
+              <option key={item.id} value={item.title}>
+                {item.title}
               </option>
             ))}
           </select>

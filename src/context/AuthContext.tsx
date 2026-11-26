@@ -24,8 +24,6 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: AuthProviderProps) => {
  
   const [user, setUser] = useState<string | null>(null);
-
-  /** True until localStorage is checked so ProtectedRoute waits before redirecting */
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
