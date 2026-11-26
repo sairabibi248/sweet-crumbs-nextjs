@@ -9,6 +9,7 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import type { Item } from "@/types/item";
 import type { ItemFormFields } from "@/schemas/itemSchema";
 
+
 export default function InventoryPage() {
   const {
     items,
@@ -23,6 +24,7 @@ export default function InventoryPage() {
     addItem,
     updateItem,
   } = useInventory();
+
 
   const [isAdding, setIsAdding] = useState(false);
   const [editingItem, setEditingItem] = useState<Item | null>(null);

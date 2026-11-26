@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getRecipeById } from "@/api/recipes";
 import type { RecipeDetail } from "@/types/recipe";
 
+
 type RecipeDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -22,6 +23,8 @@ const getIngredients = (recipe: RecipeDetail) => {
 
   return ingredients;
 };
+
+
 
 export default async function RecipeDetailsPage({ params }: RecipeDetailsPageProps) {
   const { id } = await params;

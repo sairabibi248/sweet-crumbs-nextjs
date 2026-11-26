@@ -4,14 +4,24 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 type Theme = "light" | "dark";
 
+/** Data that ThemeContext gives to every page */
 type ThemeContextType = {
   theme: Theme;
   toggleTheme: () => void;
 };
 
+
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
+/**
+ * Gives theme data to all pages
+ * Used in Providers.tsx around the whole app
+ * First effect reads the saved theme from localStorage once when the app opens
+ * Second effect adds or removes the dark class on the html tag and saves the theme
+ */
+
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  /** Theme starts as light until the saved theme is read */
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
@@ -30,6 +40,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -44,6 +55,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     </ThemeContext.Provider>
   );
 };
+
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);

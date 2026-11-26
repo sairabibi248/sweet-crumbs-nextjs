@@ -7,23 +7,29 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import type { OrderStatus } from "@/types/order";
 import type { OrderFormFields } from "@/schemas/orderSchema";
 
+
+
 const statusColors: Record<OrderStatus, string> = {
   Pending: "bg-yellow-100 text-yellow-700",
   Completed: "bg-green-100 text-green-700",
   Cancelled: "bg-red-100 text-red-700",
 };
 
+
 const optionClass =
   "bg-white text-[#111827] dark:bg-[#1C1D21] dark:text-[#F4F4F5]";
 
 export default function OrdersPage() {
+
   const orders = useOrderStore((state) => state.orders);
   const addOrder = useOrderStore((state) => state.addOrder);
   const updateStatus = useOrderStore((state) => state.updateStatus);
   const deleteOrder = useOrderStore((state) => state.deleteOrder);
 
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
 
   const handleAdd = (data: OrderFormFields) => {
     addOrder({
@@ -33,6 +39,7 @@ export default function OrdersPage() {
     });
     setIsFormOpen(false);
   };
+
 
   const handleDelete = () => {
     if (deleteId) {
@@ -63,6 +70,7 @@ export default function OrdersPage() {
               <th className="p-4">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {orders.map((order) => (
               <tr
@@ -102,6 +110,7 @@ export default function OrdersPage() {
               </tr>
             ))}
           </tbody>
+
         </table>
 
         {orders.length === 0 && (
